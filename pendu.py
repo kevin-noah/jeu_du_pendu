@@ -1,7 +1,7 @@
 # ─── Imports ciblés (fonctions utilisées uniquement) ──────────────────────────
 from random import choice as choix
 from unicodedata import normalize as normalise, category as categorie
-from sys import argv, exit
+from sys import exit
 
 # ─── Chargement des données ────────────────────────────────────────────────────
 
@@ -25,6 +25,7 @@ def charger_mots(fichier='mots_pendu.txt'):
 
 # Supprime les accents et met le texte en minuscules pour des comparaisons uniformes.
 # Permet au joueur de taper 'e' pour trouver 'é', 'è' ou 'ê' sans distinction.
+# Solution obtenue sur https://www.geeksforgeeks.orq/how-to-remove-string-accents-using-python-3/
 def supprimer_accents(texte):
     # Forme NFD : chaque lettre accentuée est décomposée en base + diacritique séparé
     nfd = normalise('NFD', texte)
@@ -146,12 +147,29 @@ def demander_rejouer():
             return False
         print("Veuillez entrer 'o' pour oui ou 'n' pour non.")
 
-# Point d'entrée : lit l'argument de ligne de commande et enchaîne les parties.
+def choisir_fichier():
+    while True:
+        reponse = input("Voulez-vous utiliser un fichier de mots personnalisé ? (o/n) : ").strip().lower()
+        if reponse in ('n', 'non'):
+            return 'mots_pendu.txt'
+        if reponse in ('o', 'oui'):
+            break
+        print("Veuillez entrer 'o' pour oui ou 'n' pour non.")
+    while True:
+        fichier = input("Entrez le chemin du fichier de mots : ").strip()
+        if not fichier:
+            print("Veuillez entrer un nom de fichier.")
+            continue
+        try:
+            open(fichier, 'r', encoding='utf-8').close()
+            return fichier
+        except FileNotFoundError:
+            print(f"Fichier '{fichier}' introuvable. Veuillez réessayer.")
+
+
 def main():
-    # Utilise le fichier passé en argument ou le fichier par défaut si aucun n'est fourni
-    fichier_mots = argv[1] if len(argv) > 1 else 'mots_pendu.txt'
     print("Bienvenue au Jeu du Pendu !")
-    # La boucle s'arrête uniquement quand le joueur refuse de rejouer
+    fichier_mots = choisir_fichier()
     while True:
         jouer(fichier_mots)
         if not demander_rejouer():
