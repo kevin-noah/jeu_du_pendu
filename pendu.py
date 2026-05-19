@@ -147,6 +147,7 @@ def demander_rejouer():
             return False
         print("Veuillez entrer 'o' pour oui ou 'n' pour non.")
 
+#procedure pour permettre à l'utilisateur de faire le choix son propre fichier de mots.
 def choisir_fichier():
     while True:
         reponse = input("Voulez-vous utiliser un fichier de mots personnalisé ? (o/n) : ").strip().lower()
@@ -155,7 +156,9 @@ def choisir_fichier():
         if reponse in ('o', 'oui'):
             break
         print("Veuillez entrer 'o' pour oui ou 'n' pour non.")
+    #on boucle dans l'utilisateur n'a pas saisi un chemin de fichier valide
     while True:
+        #retrait des caractères non imprimable du chemin du fichier.
         fichier = input("Entrez le chemin du fichier de mots : ").strip()
         if not fichier:
             print("Veuillez entrer un nom de fichier.")
@@ -166,7 +169,7 @@ def choisir_fichier():
         except FileNotFoundError:
             print(f"Fichier '{fichier}' introuvable. Veuillez réessayer.")
 
-
+#procedure principale
 def main():
     print("Bienvenue au Jeu du Pendu !")
     fichier_mots = choisir_fichier()

@@ -1,11 +1,12 @@
 # Jeu du Pendu
 
 **Auteur :** Kevin Noah  
-**Date de remise :** 18 mai 2026
+**Date de remise :** 19 mai 2026
 
 ## Description
 
-Implémentation en ligne de commande du jeu du pendu. Le programme choisit aléatoirement un mot dans une liste et invite le joueur à le deviner lettre par lettre, avec 6 tentatives autorisées.
+Implémentation en ligne de commande du jeu du pendu. Le programme choisit aléatoirement un mot dans une liste et invite 
+le joueur à le deviner lettre par lettre, avec 6 tentatives autorisées.
 
 Fonctionnalités :
 - Gestion native des accents : taper `e` permet de trouver `é`, `è`, `ê`, etc.
@@ -27,10 +28,6 @@ Fonctionnalités :
 - Aucune dépendance externe (bibliothèque standard uniquement)
 
 ## Utilisation
-
-```bash
-python pendu.py
-```
 
 Au lancement, le programme demande si vous souhaitez utiliser un fichier de mots personnalisé :
 
